@@ -1,0 +1,19 @@
+@import "tailwindcss";
+
+@layer components {
+    .card {
+        @apply w-111.25 h-46 lg:w-198.75 lg:h-82 bg-[#202020] border-2 border-white rounded-lg lg:rounded-xl grid grid-rows-[22%_56%_22%] place-items-center -mt-25
+    }
+
+    .card-title {
+        @apply pt-5 text-xl lg:text-4xl font-extrabold
+    }
+
+    .btn-end-state {
+        @apply flex items-center gap-1 lg:gap-2 px-2 lg:px-3 py-1 lg:py-2 border-2 lg:border-3 border-white rounded-xl lg:rounded-2xl bg-[#242424] text-xs lg:text-xl font-light hover:bg-white hover:text-black 
+    }
+
+    .btn-anim {
+        @apply cursor-pointer select-none active:scale-85 transition-all  disabled:pointer-events-none
+    }
+}
