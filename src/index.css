@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+@theme {
+    --font-sans: 'Inter', sans-serif;
+}
+
 @layer components {
     .card {
         @apply w-111.25 h-46 lg:w-198.75 lg:h-82 bg-[#202020] border-2 border-white rounded-lg lg:rounded-xl grid grid-rows-[22%_56%_22%] place-items-center -mt-25

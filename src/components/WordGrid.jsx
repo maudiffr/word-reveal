@@ -3,8 +3,8 @@ const getLetterState = (isRevealed) => ({
         ? "items-center bg-white text-black"
         : "items-end bg-[#171717] text-white",
     span: isRevealed
-        ? "pt-1 text-xl lg:text-5xl font-bold"
-        : "lg:pb-1 text-3xl lg:text-6xl lg:font-light"
+        ? "text-xl lg:text-5xl font-bold"
+        : "text-3xl lg:text-6xl lg:font-light"
 })
 
 const WordGrid = ({word, revealedLetters}) => {
