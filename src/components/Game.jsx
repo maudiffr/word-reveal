@@ -39,7 +39,7 @@ const Game = () => {
                         return newRevealedState;
                     }
                 });
-            }, 3000);
+            }, 10000);
             return () => clearInterval(interval);
             }        
     }, [gameState]);
