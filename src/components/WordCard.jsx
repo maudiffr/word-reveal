@@ -11,7 +11,7 @@ const WordCard = ({word, revealedLetters, gameState, setGameState, startGame }) 
                     <div className="row-span-3">
                         <button 
                             onClick={() => startGame()}
-                            className="flex items-center gap-3 px-6 py-4 border-white border-3 rounded-2xl bg-[#202020] text-5xl font-light hover:bg-white hover:text-black btn-anim"
+                            className="flex animate-pulse items-center gap-3 px-6 py-4 border-white border-3 rounded-2xl bg-[#202020] text-5xl font-light hover:bg-white hover:text-black btn-anim"
                         >
                             <Play size={48} strokeWidth={1.5}/>
                             Jouer

@@ -1,9 +1,30 @@
+import { useEffect, useRef } from 'react'
 import WordButtons from './WordButtons'
+import confetti from 'canvas-confetti'
 
 const EndScreen = ({word, title, setGameState, startGame}) => {
+    const canvasRef = useRef(null);
+
+    useEffect(() => {
+        if (title === "MOT TROUVÉ" && canvasRef.current) {
+            const myConfetti = confetti.create(canvasRef.current, { resize: true });
+            myConfetti({
+                spread: 130,
+                startVelocity: 30,
+                gravity: 1.5,
+            });
+        }
+    }, []);
+    
     return (
         <>
-            <h2 className="card-title">{title}: {word}</h2>
+            {title === "MOT TROUVÉ" && (
+                <canvas
+                    ref={canvasRef}
+                    className="absolute inset-0 w-full h-full pointer-events-none"
+                />
+            )}
+            <h2 className={`card-title ${title === "MOT TROUVÉ" ? "animate-title-win" : "animate-title-lose"}`}>{title}: {word}</h2>
                             
             <div className="font-extrabold lg:text-3xl pt-1">
                 {title === "MOT TROUVÉ" ? "BRAVO !" : "PERDU !"}
