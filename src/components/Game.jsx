@@ -10,7 +10,7 @@ const Game = () => {
     const [revealedLetters, setRevealedLetters] = useState([]);
 
     const startGame = () => {
-        let newWord = "CA";
+        let newWord = getRandomWord();
         while (newWord === word)
             newWord = getRandomWord();
         setWord(newWord);
