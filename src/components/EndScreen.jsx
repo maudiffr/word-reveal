@@ -9,8 +9,8 @@ const EndScreen = ({word, title, setGameState, startGame}) => {
         if (title === "MOT TROUVÉ" && canvasRef.current) {
             const myConfetti = confetti.create(canvasRef.current, { resize: true });
             myConfetti({
-                spread: 130,
-                startVelocity: 30,
+                spread: 135,
+                startVelocity: 35,
                 gravity: 1.5,
             });
         }

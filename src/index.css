@@ -3,7 +3,7 @@
 @theme {
     --font-sans: 'Inter', sans-serif;
 
-    --animate-reveal: reveal 600ms ease-out;
+    --animate-reveal: reveal 700ms ease-out;
     
     @keyframes reveal {
         0%   { transform: scaleX(1); }
@@ -11,18 +11,7 @@
         100% { transform: scaleX(1); }
     }
 
-    --animate-input: shake 800ms ease-out;
-
-    @keyframes shake {
-        0%  { transform: translateX(0); }
-        20% { transform: translateX(-6px); }
-        40% { transform: translateX(10px); }
-        60% { transform: translateX(-6px); }
-        80% { transform: translateX(3px); }
-        100% { transform: translateX(0px); }
-    }
-
-    --animate-title-win: green-scale 700ms ease-in-out;
+    --animate-title-win: green-scale 800ms ease-in-out;
 
     @keyframes green-scale {
         0%   { transform: scale(1); }
@@ -30,7 +19,7 @@
         100% { transform: scale(1); }
     }
 
-    --animate-title-lose: red-scale 700ms ease-in-out;
+    --animate-title-lose: red-scale 800ms ease-in-out;
 
     @keyframes red-scale {
         0%   { transform: scale(1); }

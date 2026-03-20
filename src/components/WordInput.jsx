@@ -1,9 +1,8 @@
-import { useRef, useState, useEffect } from 'react'
+import { useRef, useEffect } from 'react'
 import { GameStates } from '../utils/gameConstants'
 
 const WordInput = ({word, gameState, setGameState}) => {
     const inputRef = useRef(null);
-    const [isWrong, setIsWrong] = useState(false);
 
     useEffect(() => {
         if (gameState === GameStates.PLAY)
@@ -28,12 +27,9 @@ const WordInput = ({word, gameState, setGameState}) => {
         else if (guess === word) {
             setGameState(GameStates.WIN);
         } else {
-            setIsWrong(true);
-            setTimeout(() => setIsWrong(false), 600);
+            form.reset();
+            inputRef.current?.focus();
         }
-        
-        form.reset();
-        inputRef.current?.focus();
     }
 
     return (
@@ -44,7 +40,7 @@ const WordInput = ({word, gameState, setGameState}) => {
                 id="guess"
                 aria-label="Entrez votre réponse"
                 maxLength={20}
-                className={`w-60 lg:w-80 mx-4 px-4 border border-white rounded-lg text-base lg:text-xl caret-green-500 outline-none bg-transparent focus:ring ${isWrong ? "animate-input" : ""}`}
+                className={`w-60 lg:w-80 mx-4 px-4 border border-white rounded-lg text-base lg:text-xl caret-green-500 outline-none bg-transparent focus:ring`}
                 disabled={gameState !== GameStates.PLAY}
                 ref={inputRef}
             />
