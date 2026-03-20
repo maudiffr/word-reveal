@@ -24,7 +24,7 @@ const EndScreen = ({word, title, setGameState, startGame}) => {
                     className="absolute inset-0 w-full h-full pointer-events-none"
                 />
             )}
-            <h2 className={`card-title ${title === "MOT TROUVÉ" ? "animate-title-win" : "animate-title-lose"}`}>{title}: {word}</h2>
+            <h2 className={`card-title ${title === "MOT TROUVÉ" ? "animate-title-win" : "animate-title-lose"}`}>{title} : {word}</h2>
                             
             <div className="font-extrabold lg:text-3xl pt-1">
                 {title === "MOT TROUVÉ" ? "BRAVO !" : "PERDU !"}

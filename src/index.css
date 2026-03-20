@@ -30,18 +30,22 @@
 
 @layer components {
     .card {
-        @apply relative w-111.25 h-46 lg:w-198.75 lg:h-82 bg-[#202020] border-2 border-white rounded-lg lg:rounded-xl grid grid-rows-[22%_56%_22%] place-items-center -mt-25
+        @apply relative grid grid-rows-[22%_56%_22%] place-items-center w-111.5 h-46.5 lg:w-199.5 lg:h-82.5 -mt-25 border-2 border-white rounded-lg lg:rounded-xl bg-[#202020]
     }
 
     .card-title {
         @apply pt-5 text-xl lg:text-4xl font-extrabold
     }
 
+    .btn-basic-style {
+        @apply flex items-center justify-center border lg:border-2 border-white bg-[#202020] font-light hover:bg-white hover:text-black
+    }
+
     .btn-end-state {
-        @apply flex items-center gap-1 lg:gap-2 px-2 lg:px-3 py-1 lg:py-2 border-2 lg:border-3 border-white rounded-xl lg:rounded-2xl bg-[#242424] text-xs lg:text-xl font-light hover:bg-white hover:text-black 
+        @apply flex items-center justify-center min-w-21 lg:min-w-37 px-5 lg:px-8 py-2 lg:py-3 rounded-4xl lg:rounded-4xl text-xs lg:text-2xl  
     }
 
     .btn-anim {
-        @apply cursor-pointer select-none active:scale-85 transition-all  disabled:pointer-events-none
+        @apply cursor-pointer select-none active:scale-90 transition-all disabled:pointer-events-none
     }
 }

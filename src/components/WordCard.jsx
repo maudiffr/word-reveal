@@ -10,8 +10,8 @@ const WordCard = ({word, revealedLetters, gameState, setGameState, startGame }) 
                 return (
                     <div className="row-span-3">
                         <button 
-                            onClick={() => setTimeout(startGame, 225)}
-                            className="flex items-center gap-3 px-6 py-4 border-white border-3 rounded-2xl bg-[#202020] text-5xl font-light hover:bg-white hover:text-black btn-anim"
+                            onClick={() => startGame()}
+                            className="btn-basic-style gap-3 px-6 py-5 rounded-3xl text-5xl btn-anim"
                         >
                             <Play size={48} strokeWidth={1.5}/>
                             Jouer
