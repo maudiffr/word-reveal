@@ -1,51 +1,76 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @theme {
-    --font-sans: 'Inter', sans-serif;
+  --font-sans: 'Inter', sans-serif;
 
-    --animate-reveal: reveal 700ms ease-out;
-    
-    @keyframes reveal {
-        0%   { transform: scaleX(1); }
-        50%  { transform: scaleX(1.15); }
-        100% { transform: scaleX(1); }
+  --animate-reveal: reveal 700ms ease-out;
+
+  @keyframes reveal {
+    0% {
+      transform: scaleX(1);
     }
-
-    --animate-title-win: green-scale 800ms ease-in-out;
-
-    @keyframes green-scale {
-        0%   { transform: scale(1); }
-        50%  { transform: scale(1.1); color: #22c55e; }
-        100% { transform: scale(1); }
+    50% {
+      transform: scaleX(1.15);
     }
-
-    --animate-title-lose: red-scale 800ms ease-in-out;
-
-    @keyframes red-scale {
-        0%   { transform: scale(1); }
-        50%  { transform: scale(1.1); color: #ef4444; }
-        100% { transform: scale(1); }
+    100% {
+      transform: scaleX(1);
     }
+  }
+
+  --animate-title-win: green-scale 800ms ease-in-out;
+
+  @keyframes green-scale {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1);
+      color: #22c55e;
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  --animate-title-lose: red-scale 800ms ease-in-out;
+
+  @keyframes red-scale {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1);
+      color: #ef4444;
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
 }
 
 @layer components {
-    .card {
-        @apply relative grid grid-rows-[22%_56%_22%] place-items-center w-111.5 h-46.5 lg:w-199.5 lg:h-82.5 -mt-25 border-2 border-white rounded-lg lg:rounded-xl bg-[#202020]
-    }
+  .card {
+    @apply relative grid grid-rows-[22%_56%_22%] place-items-center w-111.5 h-46.5 lg:w-199.5 lg:h-82.5 -mt-25 border-2 border-white rounded-lg lg:rounded-xl bg-[#202020];
+  }
 
-    .card-title {
-        @apply pt-5 text-xl lg:text-4xl font-extrabold
-    }
+  .card-title {
+    @apply pt-5 text-xl lg:text-4xl font-extrabold;
+  }
 
-    .btn-basic-style {
-        @apply flex items-center justify-center border lg:border-2 border-white bg-[#202020] font-light hover:bg-white hover:text-black
-    }
+  .btn-basic-style {
+    @apply flex items-center justify-center border border-white bg-[#202020] font-light hover:bg-white hover:text-black;
+  }
 
-    .btn-end-state {
-        @apply flex items-center justify-center min-w-21 lg:min-w-37 px-5 lg:px-8 py-2 lg:py-3 rounded-4xl lg:rounded-4xl text-xs lg:text-2xl  
-    }
+  .btn-end-state {
+    @apply flex items-center justify-center min-w-21 lg:min-w-37 px-5 lg:px-8 py-2 lg:py-3 rounded-4xl lg:rounded-4xl text-xs lg:text-2xl;
+  }
 
-    .btn-anim {
-        @apply cursor-pointer select-none active:scale-90 transition-all disabled:pointer-events-none
-    }
+  .btn-anim {
+    @apply cursor-pointer select-none active:scale-90 transition-all disabled:pointer-events-none;
+  }
+}
+
+::selection {
+  background-color: white;
+  color: black;
 }
