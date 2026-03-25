@@ -1,8 +1,10 @@
 import { useEffect, useRef } from 'react'
 import WordButtons from './WordButtons'
 import confetti from 'canvas-confetti'
+import { useGame } from '../../hooks/useGame'
 
-const EndScreen = ({ word, title, setGameState, startGame }) => {
+const EndScreen = ({ title }) => {
+  const { word } = useGame()
   const canvasRef = useRef(null)
 
   useEffect(() => {
@@ -25,7 +27,7 @@ const EndScreen = ({ word, title, setGameState, startGame }) => {
         />
       )}
       <h2
-        className={`card-title ${title === 'MOT TROUVÉ' ? 'animate-title-win' : 'animate-title-lose'}`}
+        className={`game-card-title ${title === 'MOT TROUVÉ' ? 'animate-title-win' : 'animate-title-lose'}`}
       >
         {title} : {word}
       </h2>
@@ -35,7 +37,7 @@ const EndScreen = ({ word, title, setGameState, startGame }) => {
       </div>
 
       <div className="flex justify-between w-full px-2 lg:px-4">
-        <WordButtons setGameState={setGameState} startGame={startGame} />
+        <WordButtons />
       </div>
     </>
   )

@@ -10,7 +10,7 @@ const Header = () => {
           Word Reveal
         </Link>
         <div></div>
-        <div class="flex items-center justify-end gap-3 select-none">
+        <div className="flex items-center justify-end gap-3 select-none">
           {location.pathname !== '/login' && (
             <Link
               to="/login"

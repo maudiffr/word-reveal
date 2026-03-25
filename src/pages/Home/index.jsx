@@ -1,9 +1,12 @@
-import Game from '../../components/Game'
+import { GameProvider } from '../../context/GameProvider'
+import Game from '../../components/Game/Game'
 
 function Home() {
   return (
     <>
-      <Game />
+      <GameProvider>
+        <Game />
+      </GameProvider>
     </>
   )
 }

@@ -1,10 +1,12 @@
-import { GameStates } from '../utils/gameConstants'
+import { useGame } from '../../hooks/useGame'
 
-const WordButtons = ({ setGameState, startGame }) => {
+const WordButtons = () => {
+  const { resetGame, startGame } = useGame()
+
   return (
     <>
       <button
-        onClick={() => setGameState(GameStates.IDLE)}
+        onClick={() => resetGame()}
         className="btn-basic-style btn-end-state btn-anim"
       >
         Menu

@@ -1,3 +1,5 @@
+import { useGame } from '../../hooks/useGame'
+
 const getLetterState = (isRevealed) => ({
   container: isRevealed
     ? 'items-center bg-white text-black animate-reveal'
@@ -7,7 +9,9 @@ const getLetterState = (isRevealed) => ({
     : 'text-3xl lg:text-6xl lg:font-light',
 })
 
-const WordGrid = ({ word, revealedLetters }) => {
+const WordGrid = () => {
+  const { word, revealedLetters } = useGame()
+
   return (
     <>
       {word.split('').map((letter, index) => {

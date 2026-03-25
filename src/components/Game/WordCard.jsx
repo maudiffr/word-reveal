@@ -1,15 +1,12 @@
-import { GameStates } from '../utils/gameConstants'
+import { GameStates } from '../../utils/gameConstants'
 import { Play } from 'lucide-react'
 import WordGrid from './WordGrid'
 import EndScreen from './EndScreen'
+import { useGame } from '../../hooks/useGame'
 
-const WordCard = ({
-  word,
-  revealedLetters,
-  gameState,
-  setGameState,
-  startGame,
-}) => {
+const WordCard = () => {
+  const { gameState, startGame } = useGame()
+
   const renderContent = () => {
     switch (gameState) {
       case GameStates.IDLE:
@@ -31,10 +28,10 @@ const WordCard = ({
       case GameStates.PLAY:
         return (
           <>
-            <h2 className="card-title">TROUVER LE MOT</h2>
+            <h2 className="game-card-title">TROUVER LE MOT</h2>
 
             <div className="flex justify-center items-center gap-1 lg:gap-2">
-              <WordGrid word={word} revealedLetters={revealedLetters} />
+              <WordGrid />
             </div>
 
             <p className="self-start text-sm lg:text-2xl font-semibold opacity-45 italic">
@@ -43,29 +40,15 @@ const WordCard = ({
           </>
         )
       case GameStates.WIN:
-        return (
-          <EndScreen
-            word={word}
-            title="MOT TROUVÉ"
-            setGameState={setGameState}
-            startGame={startGame}
-          />
-        )
+        return <EndScreen title="MOT TROUVÉ" />
       case GameStates.LOSE:
-        return (
-          <EndScreen
-            word={word}
-            title="MOT RÉVÉLÉ"
-            setGameState={setGameState}
-            startGame={startGame}
-          />
-        )
+        return <EndScreen title="MOT RÉVÉLÉ" />
     }
   }
 
   return (
     <div
-      className="card
+      className="game-card
                 bg-[linear-gradient(to_right,rgba(255,255,255,0.025)_2px,transparent_3px),linear-gradient(to_bottom,rgba(255,255,255,0.025)_2px,transparent_3px)]
                 bg-size-[20px_20px] lg:bg-size-[36px_36px]
                 shadow-[inset_0_0_30px_rgba(255,255,255,0.15)]"

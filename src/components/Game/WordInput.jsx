@@ -1,7 +1,9 @@
 import { useRef, useEffect } from 'react'
-import { GameStates } from '../utils/gameConstants'
+import { GameStates } from '../../utils/gameConstants'
+import { useGame } from '../../hooks/useGame'
 
-const WordInput = ({ word, gameState, setGameState }) => {
+const WordInput = () => {
+  const { gameState, submitGuess } = useGame()
   const inputRef = useRef(null)
 
   useEffect(() => {
@@ -12,21 +14,16 @@ const WordInput = ({ word, gameState, setGameState }) => {
   const handleSubmit = (e) => {
     e.preventDefault()
 
-    const form = e.target
+    const guess = inputRef.current.value.toUpperCase()
 
-    const formData = new FormData(form)
-
-    const guess = formData.get('guess')?.toUpperCase()
-
-    if (!guess?.trim()) {
+    if (!guess.trim()) {
       inputRef.current?.focus()
       return
-    } else if (guess === word) {
-      setGameState(GameStates.WIN)
-    } else {
-      form.reset()
-      inputRef.current?.focus()
     }
+
+    submitGuess(guess)
+    inputRef.current.value = ''
+    inputRef.current?.focus()
   }
 
   return (
