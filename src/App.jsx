@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Header from './components/Header'
+import LayoutWithHeader from './layouts/LayoutWithHeader'
 import Home from './pages/Home'
 import Register from './pages/Register'
 import Login from './pages/Login'
@@ -26,11 +27,12 @@ function App() {
   return (
     <div className="flex flex-col min-h-screen bg-[#171717] text-white">
       <Router>
-        <Header />
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
+          <Route element={<LayoutWithHeader />}>
+            <Route path="/" element={<Home />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<Login />} />
+          </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>

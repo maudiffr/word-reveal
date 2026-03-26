@@ -6,13 +6,13 @@ const WordButtons = () => {
   return (
     <>
       <button
-        onClick={() => resetGame()}
+        onClick={resetGame}
         className="btn-basic-style btn-end-state btn-anim"
       >
         Menu
       </button>
       <button
-        onClick={() => startGame()}
+        onClick={startGame}
         className="btn-basic-style btn-end-state btn-anim"
       >
         Rejouer

@@ -1,4 +1,5 @@
 import { Link, useLocation } from 'react-router-dom'
+import { View } from 'lucide-react'
 
 const Header = () => {
   const location = useLocation()
@@ -6,7 +7,8 @@ const Header = () => {
   return (
     <header className="bg-black">
       <nav className="grid grid-cols-3 items-center max-w-360 mx-auto px-8 py-3">
-        <Link to="/" className="text-2xl font-semibold">
+        <Link to="/" className="flex items-center gap-2 text-2xl font-semibold">
+          <View size={24} />
           Word Reveal
         </Link>
         <div></div>
