@@ -6,9 +6,9 @@ const Header = () => {
 
   return (
     <header className="bg-black">
-      <nav className="grid grid-cols-3 items-center max-w-360 mx-auto px-8 py-3">
+      <nav className="grid grid-cols-3 items-center max-w-360 mx-auto px-8 py-3 whitespace-nowrap">
         <Link to="/" className="flex items-center gap-2 text-2xl font-semibold">
-          <View size={24} />
+          <View size={24} className="shrink-0" />
           Word Reveal
         </Link>
         <div></div>
