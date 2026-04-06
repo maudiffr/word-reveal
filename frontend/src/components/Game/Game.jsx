@@ -3,7 +3,7 @@ import WordInput from './WordInput'
 
 const Game = () => {
   return (
-    <div className="flex flex-col flex-1 justify-center items-center gap-8">
+    <div className="flex flex-col flex-1 items-center gap-8 px-4 pt-45">
       <WordCard />
       <WordInput />
     </div>

@@ -50,7 +50,7 @@
 
 @layer components {
   .game-card {
-    @apply relative grid grid-rows-[22%_56%_22%] place-items-center w-111.5 h-46.5 lg:w-199.5 lg:h-82.5 -mt-25 border-2 border-white rounded-lg lg:rounded-xl bg-[#202020];
+    @apply relative grid grid-rows-[22%_56%_22%] place-items-center w-111.5 h-46.5 lg:w-199.5 lg:h-82.5 border-2 border-white rounded-lg lg:rounded-xl bg-[#202020];
   }
 
   .game-card-title {

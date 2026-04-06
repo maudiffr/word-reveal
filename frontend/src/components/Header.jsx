@@ -18,15 +18,15 @@ const Header = () => {
               to="/login"
               className="px-3 py-1.5 border border-white/20 rounded-lg text-[15px] hover:bg-white/10 whitespace-nowrap transition-colors"
             >
-              Log In
+              Connexion
             </Link>
           )}
           {location.pathname !== '/register' && (
             <Link
               to="/register"
-              className="px-3 py-1.5 rounded-lg bg-white text-[15px] text-black hover:bg-white/80 whitespace-nowrap transition-colors"
+              className="px-3 py-1.5 border rounded-lg bg-white text-[15px] text-black hover:bg-white/80 whitespace-nowrap transition-colors"
             >
-              Sign Up
+              Inscription
             </Link>
           )}
         </div>
