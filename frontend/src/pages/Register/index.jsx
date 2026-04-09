@@ -56,14 +56,14 @@ function Register() {
           </div>
           <button
             type="submit"
-            className="mt-15 px-3 py-2 rounded-lg bg-white text-lg text-black font-medium hover:bg-white/80 whitespace-nowrap transition-colors"
+            className="mt-15 px-3 py-2.5 rounded-lg bg-white text-lg text-black font-medium hover:bg-white/80 transition-colors select-none cursor-pointer"
           >
             S'inscrire
           </button>
         </form>
         <div>
           Déja un compte ?{' '}
-          <Link to="/login" className="text-blue-400">
+          <Link to="/login" className="text-blue-400 hover:underline">
             Connexion
           </Link>
         </div>
