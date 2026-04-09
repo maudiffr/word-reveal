@@ -16,13 +16,20 @@ export const signup = async (req, res, next) => {
             return res.status(400).json({ error: 'Password must be at least 8 characters' });
         }
         const hash = await bcrypt.hash(req.body.password, 10);
-        await prisma.user.create({
+        const user = await prisma.user.create({
             data: {
                 password: hash,
                 username: req.body.username,
             }
         });
-        res.status(201).json({ message: 'User created successfully!' })
+        res.status(201).json({
+            userId: user.id,
+            token: jwt.sign(
+                { userId: user.id },
+                process.env.JWT_SECRET,
+                { expiresIn: '24h' }
+            )
+        });
     } catch (error) {
         console.error(error);
         if (error.code === 'P2002') {

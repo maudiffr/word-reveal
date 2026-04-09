@@ -1,23 +1,40 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { useAuth } from '../../hooks/useAuth'
 import { Eye, EyeOff } from 'lucide-react'
 
-function Register() {
+function Login() {
+  const { setIsLoggedIn } = useAuth()
   const [showPassword, setShowPassword] = useState(false)
+  const [error, setError] = useState('')
+  const navigate = useNavigate()
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-
     const form = e.target
-
     const formData = new FormData(form)
-
     const username = formData.get('username')
     const password = formData.get('password')
 
-    console.log(`${username} et ${password}`)
-
-    form.reset()
+    try {
+      const response = await fetch('http://localhost:3000/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password }),
+      })
+      const data = await response.json()
+      if (!response.ok) {
+        setError(data.error)
+        return
+      }
+      setError('')
+      localStorage.setItem('token', data.token)
+      localStorage.setItem('userId', data.userId)
+      setIsLoggedIn(true)
+      navigate('/')
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   return (
@@ -35,6 +52,7 @@ function Register() {
             aria-label="username"
             maxLength={16}
             className={`w-full lg:w-80 px-2 py-2 border border-white/20 rounded-lg bg-white/10 lg:text-lg outline-none focus:ring`}
+            required
           />
           <div className="relative">
             <input
@@ -45,6 +63,7 @@ function Register() {
               aria-label="password"
               maxLength={20}
               className={`w-full lg:w-80 px-2 py-2 border border-white/20 bg-white/10 rounded-lg lg:text-lg outline-none focus:ring`}
+              required
             />
             <button
               type="button"
@@ -53,6 +72,9 @@ function Register() {
             >
               {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
             </button>
+          </div>
+          <div className="min-h-9 self-center">
+            {error && <p className=" text-red-400 text-sm">{error}</p>}
           </div>
           <button
             type="submit"
@@ -72,4 +94,4 @@ function Register() {
   )
 }
 
-export default Register
+export default Login

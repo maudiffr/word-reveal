@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import Header from './components/Header'
+import AuthProvider from '../src/context/AuthProvider'
 import LayoutWithHeader from './layouts/LayoutWithHeader'
 import Home from './pages/Home'
 import Register from './pages/Register'
@@ -25,18 +25,20 @@ import NotFound from './pages/NotFound'
 
 function App() {
   return (
-    <div className="flex flex-col min-h-screen bg-[#171717] text-white">
-      <Router>
-        <Routes>
-          <Route element={<LayoutWithHeader />}>
-            <Route path="/" element={<Home />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/login" element={<Login />} />
-          </Route>
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </Router>
-    </div>
+    <AuthProvider>
+      <div className="flex flex-col min-h-screen bg-[#171717] text-white">
+        <Router>
+          <Routes>
+            <Route element={<LayoutWithHeader />}>
+              <Route path="/" element={<Home />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/login" element={<Login />} />
+            </Route>
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </Router>
+      </div>
+    </AuthProvider>
   )
 }
 
