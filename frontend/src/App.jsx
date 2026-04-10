@@ -4,6 +4,7 @@ import LayoutWithHeader from './layouts/LayoutWithHeader'
 import Home from './pages/Home'
 import Register from './pages/Register'
 import Login from './pages/Login'
+import Profile from './pages/Profile'
 import NotFound from './pages/NotFound'
 
 // <Router> (BrowserRouter) — contexte global, intercepte les changements d'URL
@@ -33,6 +34,7 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/register" element={<Register />} />
               <Route path="/login" element={<Login />} />
+              <Route path="/profile" element={<Profile />} />
             </Route>
             <Route path="*" element={<NotFound />} />
           </Routes>
