@@ -6,33 +6,38 @@ const Header = () => {
   const { isLoggedIn, setIsLoggedIn } = useAuth()
   const location = useLocation()
   const navigate = useNavigate()
+  const username = localStorage.getItem('username')
 
   const handleLogout = () => {
     localStorage.removeItem('token')
     localStorage.removeItem('userId')
+    localStorage.removeItem('username')
     setIsLoggedIn(false)
     navigate('/')
   }
 
   return (
     <header className="bg-black">
-      <nav className="grid grid-cols-3 items-center max-w-360 mx-auto px-8 py-3 whitespace-nowrap">
+      <nav className="grid grid-cols-3 items-center max-w-340 mx-auto px-8 py-3 whitespace-nowrap">
         <Link to="/" className="flex items-center gap-2 text-2xl font-semibold">
           <View size={24} className="shrink-0" />
           Word Reveal
         </Link>
         <div></div>
         {isLoggedIn ? (
-          <div className="flex items-center justify-end select-none gap-3">
+          <div className="flex items-center justify-end select-none gap-4">
             <Link
               to="/profile"
-              className="flex items-center justify-center w-9 h-9 border-2 rounded-full bg-white/20 text-sm font-medium hover:bg-white/30 transition-colors"
+              className="flex items-center justify-center gap-3 font-medium"
             >
-              M
+              <div className="flex items-center justify-center w-9 h-9 border-2 rounded-full bg-white/20  hover:bg-white/30 transition-colors">
+                {username?.[0]?.toUpperCase()}
+              </div>
+              <span className="text-xl">{username}</span>
             </Link>
             <button
               onClick={handleLogout}
-              className="px-3 py-1.5 border border-white/20 rounded-lg text-[15px] hover:bg-white/10 whitespace-nowrap transition-colors"
+              className="px-3 py-1.5 border border-white/20 rounded-lg text-[13px] hover:bg-white/10 cursor-pointer whitespace-nowrap transition-colors"
             >
               Déconnexion
             </button>

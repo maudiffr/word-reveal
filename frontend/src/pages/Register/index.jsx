@@ -30,6 +30,7 @@ function Register() {
       setError('')
       localStorage.setItem('token', data.token)
       localStorage.setItem('userId', data.userId)
+      localStorage.setItem('username', data.username)
       setIsLoggedIn(true)
       navigate('/')
     } catch (error) {
