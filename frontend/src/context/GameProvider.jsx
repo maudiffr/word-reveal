@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { GameStates } from '../utils/gameConstants'
 import { GameContext } from './GameContext'
 import { getRandomWord, getHiddenLetters } from '../utils/gameUtils'
@@ -17,7 +17,11 @@ export const GameProvider = ({ children }) => {
   }
 
   const submitGuess = (guess) => {
-    if (guess === word) setGameState(GameStates.WIN)
+    if (guess === word) {
+      setGameState(GameStates.WIN)
+      return true
+    }
+    return false
   }
 
   const revealRandomLetter = () => {
@@ -42,12 +46,21 @@ export const GameProvider = ({ children }) => {
     })
   }
 
+  const timeoutRef = useRef(null)
+
   useEffect(() => {
     if (gameState !== GameStates.PLAY) return
 
-    const interval = setInterval(revealRandomLetter, 10000)
+    const scheduleNext = (delay) => {
+      timeoutRef.current = setTimeout(() => {
+        revealRandomLetter()
+        scheduleNext(10000)
+      }, delay)
+    }
 
-    return () => clearInterval(interval)
+    scheduleNext(20000)
+
+    return () => clearTimeout(timeoutRef.current)
   }, [gameState])
 
   const resetGame = () => {

@@ -5,5 +5,10 @@ export function getRandomWord() {
 }
 
 export function getHiddenLetters(word) {
-  return Array(word.length).fill(false)
+  const arr = Array(word.length).fill(false)
+
+  const randomIndex = Math.floor(Math.random() * word.length)
+  arr[randomIndex] = true
+
+  return arr
 }
