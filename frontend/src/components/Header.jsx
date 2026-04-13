@@ -18,19 +18,29 @@ const Header = () => {
 
   return (
     <header className="bg-black">
-      <nav className="grid grid-cols-3 items-center max-w-340 mx-auto px-8 py-3 whitespace-nowrap">
-        <Link to="/" className="flex items-center gap-2 text-2xl font-semibold">
-          <View size={24} className="shrink-0" />
-          Word Reveal
-        </Link>
-        <div></div>
+      <nav className="flex items-center justify-between max-w-340 mx-auto px-8 py-3 whitespace-nowrap">
+        <div className="flex items-center gap-12">
+          <Link
+            to="/"
+            className="flex items-center gap-2 text-2xl font-semibold"
+          >
+            <View size={24} className="shrink-0" />
+            Word Reveal
+          </Link>
+          <Link
+            to="/leaderboard"
+            className="text-white/60 hover:text-white transition-colors"
+          >
+            Classement
+          </Link>
+        </div>
         {isLoggedIn ? (
-          <div className="flex items-center justify-end select-none gap-4">
+          <div className="flex items-center select-none gap-4">
             <Link
               to="/profile"
               className="flex items-center justify-center gap-3 font-medium"
             >
-              <div className="flex items-center justify-center w-9 h-9 border-2 rounded-full bg-white/20  hover:bg-white/30 transition-colors">
+              <div className="flex items-center justify-center w-9 h-9 border-2 rounded-full bg-white/20 hover:bg-white/30 transition-colors">
                 {username?.[0]?.toUpperCase()}
               </div>
               <span className="text-xl">{username}</span>
@@ -43,7 +53,7 @@ const Header = () => {
             </button>
           </div>
         ) : (
-          <div className="flex items-center justify-end gap-3 select-none">
+          <div className="flex items-center gap-3 select-none">
             {location.pathname !== '/login' && (
               <Link
                 to="/login"

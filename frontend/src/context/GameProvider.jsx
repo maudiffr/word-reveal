@@ -70,6 +70,21 @@ export const GameProvider = ({ children }) => {
     setRevealedLetters([])
   }
 
+  useEffect(() => {
+    if (gameState !== GameStates.WIN && gameState !== GameStates.LOSE) return
+    const token = localStorage.getItem('token')
+    if (!token) return
+
+    fetch(`${import.meta.env.VITE_API_URL}/api/user/stats`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ won: gameState === GameStates.WIN }),
+    })
+  }, [gameState])
+
   return (
     <GameContext.Provider
       value={{

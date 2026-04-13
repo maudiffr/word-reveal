@@ -1,8 +1,8 @@
 import { prisma } from '../lib/prisma.js'
 
 // Fetches the authenticated user's profile from the database
-// Uses req.auth.userId injected by the auth middleware — no need for URL params
-// Explicitly selects only safe fields — never expose the password hash
+// Uses req.auth.userId injected by the auth middleware, no need for URL params
+// Explicitly selects only safe fields, never expose the password hash
 // Returns 404 if the user no longer exists, 500 for unexpected errors
 export const getUserProfile = async (req, res, next) => {
     try {
@@ -12,6 +12,8 @@ export const getUserProfile = async (req, res, next) => {
                 id: true,
                 username: true,
                 createdAt: true,
+                gamesPlayed: true,
+                gamesWon: true,
             }
         });
         if (!user) {
@@ -23,3 +25,46 @@ export const getUserProfile = async (req, res, next) => {
         res.status(500).json({ error: 'Internal server error' });
     }
 };
+
+// Fetches all users ordered by gamesWon descending for the leaderboard
+// Public routes, no auth required
+// Returns 500 for unexpected errors
+export const getLeaderboard = async (req, res) => {
+    try {
+        const users = await prisma.user.findMany({
+            select: {
+                username: true,
+                gamesPlayed: true,
+                gamesWon: true,
+            },
+            orderBy: { gamesWon: 'desc' },
+        })
+        res.status(200).json(users);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+}
+
+// Updates the authenticated user's stats at the end of a game
+// Increments gamesPlayed always, gamesWon only if won is true
+// Returns 400 if won is not a boolean, 500 for unexpected errors
+export const updateStats = async (req, res) => {
+    const  { won } = req.body
+    if (typeof won !== 'boolean') {
+        return res.status(400).json({ error: 'Invalid payload' })
+    }
+    try {
+        await prisma.user.update({
+            where: { id: req.auth.userId },
+            data: {
+                gamesPlayed: { increment: 1 },
+                ...(won && { gamesWon: { increment: 1 }}),
+            },
+        })
+        res.sendStatus(200)
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+}
