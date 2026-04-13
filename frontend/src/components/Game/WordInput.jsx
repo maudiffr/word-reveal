@@ -14,9 +14,9 @@ const WordInput = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
 
-    const guess = inputRef.current.value.toUpperCase()
+    const guess = inputRef.current.value.trim().toUpperCase()
 
-    if (!guess.trim()) {
+    if (!guess) {
       inputRef.current?.focus()
       return
     }
