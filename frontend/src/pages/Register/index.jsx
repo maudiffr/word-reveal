@@ -6,11 +6,13 @@ import { Eye, EyeOff } from 'lucide-react'
 function Register() {
   const { setIsLoggedIn } = useAuth()
   const [showPassword, setShowPassword] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
   const navigate = useNavigate()
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    setIsLoading(true)
     const form = e.target
     const formData = new FormData(form)
     const username = formData.get('username')
@@ -38,6 +40,8 @@ function Register() {
       navigate('/')
     } catch (error) {
       console.error(error)
+    } finally {
+      setIsLoading(false)
     }
   }
 
@@ -77,11 +81,16 @@ function Register() {
               {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
             </button>
           </div>
-          <div className="min-h-9 self-center">
-            {error && <p className=" text-red-400 text-sm">{error}</p>}
+          <div className="min-h-9 self-center flex items-center justify-center">
+            {isLoading ? (
+              <div className="w-5 h-5 rounded-full border-2 border-white border-t-transparent animate-spin" />
+            ) : (
+              error && <p className=" text-red-400 text-sm">{error}</p>
+            )}
           </div>
           <button
             type="submit"
+            disabled={isLoading}
             className="px-3 py-2.5 rounded-lg bg-white text-lg text-black font-medium hover:bg-white/80 transition-colors select-none cursor-pointer"
           >
             S'inscrire

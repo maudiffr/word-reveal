@@ -37,7 +37,12 @@ function Profile() {
   }, [navigate])
 
   if (!userData)
-    return <div className="flex items-center justify-center">Chargement...</div>
+    return (
+      <div className="flex flex-col items-center justify-center flex-1 gap-4">
+        <div className="w-10 h-10 rounded-full border-2 border-white border-t-transparent animate-spin" />
+        <p className="text-white/60">Chargement...</p>
+      </div>
+    )
 
   const formattedDate = new Intl.DateTimeFormat('fr-FR', {
     day: 'numeric',

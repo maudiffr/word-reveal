@@ -13,7 +13,7 @@ const WordCard = () => {
         return (
           <div className="row-span-3">
             <button
-              onClick={() => startGame()}
+              onClick={startGame}
               className="group btn-basic-style gap-4 pl-5 lg:pl-8 pr-7 lg:pr-11.25 py-4 lg:py-6 rounded-[30px] text-3xl lg:text-5xl btn-anim"
             >
               <Play

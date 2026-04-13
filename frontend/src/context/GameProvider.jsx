@@ -9,6 +9,7 @@ export const GameProvider = ({ children }) => {
   const [revealedLetters, setRevealedLetters] = useState([])
 
   const startGame = () => {
+    fetch(`${import.meta.env.VITE_API_URL}/`)
     let newWord = getRandomWord()
     while (newWord === word) newWord = getRandomWord()
     setWord(newWord)
