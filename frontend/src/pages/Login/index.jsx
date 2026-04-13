@@ -91,7 +91,7 @@ function Login() {
           <button
             type="submit"
             disabled={isLoading}
-            className="px-3 py-2.5 rounded-lg bg-white text-lg text-black font-medium hover:bg-white/80 transition-colors select-none cursor-pointer"
+            className="px-3 py-2.5 rounded-lg bg-white text-lg text-black font-medium hover:bg-white/80 transition-colors select-none cursor-pointer disabled:pointer-events-none disabled:opacity-50"
           >
             Se connecter
           </button>

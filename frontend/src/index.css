@@ -3,7 +3,7 @@
 @theme {
   --font-sans: 'Inter', sans-serif;
 
-  --animate-reveal: reveal 700ms ease-out;
+  --animate-letter-reveal: reveal 700ms ease-out;
 
   @keyframes reveal {
     0% {

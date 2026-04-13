@@ -2,7 +2,7 @@ import { useGame } from '../../hooks/useGame'
 
 const getLetterState = (isRevealed) => ({
   container: isRevealed
-    ? 'items-center bg-white text-black animate-reveal'
+    ? 'items-center bg-white text-black animate-letter-reveal'
     : 'items-end bg-[#171717] text-white',
   span: isRevealed
     ? 'text-xl lg:text-5xl font-bold'
