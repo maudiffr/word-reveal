@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import AuthProvider from '../src/context/AuthProvider'
 import LayoutWithHeader from './layouts/LayoutWithHeader'
@@ -25,6 +26,10 @@ import NotFound from './pages/NotFound'
 //            Utilise pushState sous le capot.
 
 function App() {
+  useEffect(() => {
+    fetch(`${import.meta.env.VITE_API_URL}/`)
+  }, [])
+
   return (
     <AuthProvider>
       <div className="flex flex-col min-h-screen bg-[#171717] text-white">
