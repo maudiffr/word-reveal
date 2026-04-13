@@ -21,7 +21,11 @@ const WordInput = () => {
       return
     }
 
-    submitGuess(guess)
+    const correct = submitGuess(guess)
+    if (!correct) {
+      inputRef.current?.classList.add('animate-shake')
+      setTimeout(() => inputRef.current?.classList.remove('animate-shake'), 500)
+    }
     inputRef.current.value = ''
     inputRef.current?.focus()
   }
