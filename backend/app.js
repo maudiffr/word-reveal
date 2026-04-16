@@ -1,10 +1,14 @@
 import express from 'express';
+import helmet from 'helmet'
 import authRoutes from './routes/auth.js'
 import userRoutes from './routes/user.js'
 
 // Create an Express application instance
 // `app` will handle routes, middlewares, and all incoming HTTP requests
 const app = express();
+
+// Helmet sets various HTTP headers to protect the app from common vulnerabilities
+app.use(helmet());
 
 // List of allowed origins for CORS
 // Only these frontends will be able to make requests to this API from a browser
@@ -52,7 +56,7 @@ app.use('/api/user', userRoutes);
 // Prevents the server from crashing and avoids leaking sensitive details
 app.use((err, req, res, next) => {
     console.error(err);
-    res.status(500).json({ error: 'Internal server error' });
+    res.status(err.status || 500).json({ error: err.message || 'Internal server error' });
 });
 
 export default app;

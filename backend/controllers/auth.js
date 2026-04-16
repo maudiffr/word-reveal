@@ -1,25 +1,23 @@
 import { prisma } from '../lib/prisma.js';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken'
+import { signupSchema, loginSchema } from '../lib/schemas.js'
 
 // Hashes the password and creates a new user in the database
 // Returns 400 if the username is already taken (Prisma P2002 unique constraint)
 // Returns 500 for any other server error
 export const signup = async (req, res, next) => {
     try {
-        const username = req.body.username?.trim();
-        const password = req.body.password?.trim();
-        if (!username || !password) {
-            return res.status(400).json({ error: 'Missing username or password' });
+        const result = signupSchema.safeParse(req.body)
+        if (!result.success) {
+            return res.status(400).json({ error: result.error.issues[0].message })
         }
-        if (password.length < 8) {
-            return res.status(400).json({ error: 'Password must be at least 8 characters' });
-        }
-        const hash = await bcrypt.hash(req.body.password, 10);
+        const { username, password } = result.data
+        const hash = await bcrypt.hash(password, 10);
         const user = await prisma.user.create({
             data: {
                 password: hash,
-                username: req.body.username,
+                username: username,
             }
         });
         res.status(201).json({
@@ -32,11 +30,10 @@ export const signup = async (req, res, next) => {
             )
         });
     } catch (error) {
-        console.error(error);
         if (error.code === 'P2002') {
             return res.status(400).json({ error: 'User already taken' });
         }
-        return res.status(500).json({ error: 'Internal server error' });
+        next(error);
     }
 };
 
@@ -46,14 +43,18 @@ export const signup = async (req, res, next) => {
 // If valid, returns the userId and a signed JWT token (24h expiry)
 export const login = async (req, res, next) => {
     try {
+        const result = loginSchema.safeParse(req.body)
+        if (!result.success) {
+            return res.status(400).json({ error: result.error.issues[0].message })
+        }
         const user = await prisma.user.findUnique({
-            where: { username: req.body.username }
+            where: { username: result.data.username }
         });
         if (user === null) {
             return res.status(401).json({ error: 'Invalid username or password' });
         }
 
-        const valid = await bcrypt.compare(req.body.password, user.password);
+        const valid = await bcrypt.compare(result.data.password, user.password);
         if (!valid) {
             return res.status(401).json({ error: 'Invalid username or password' });
         }
@@ -68,7 +69,6 @@ export const login = async (req, res, next) => {
             )
         });
     } catch (error) {
-        console.error(error);
-        return res.status(500).json({ error: 'Internal server error' });
+        next(error);
     }
 };

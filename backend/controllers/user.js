@@ -21,8 +21,7 @@ export const getUserProfile = async (req, res, next) => {
         }
         res.status(200).json(user);
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'Internal server error' });
+        next(error);
     }
 };
 
@@ -41,8 +40,7 @@ export const getLeaderboard = async (req, res) => {
         })
         res.status(200).json(users);
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'Internal server error' });
+        next(error);
     }
 }
 
@@ -50,11 +48,12 @@ export const getLeaderboard = async (req, res) => {
 // Increments gamesPlayed always, gamesWon only if won is true
 // Returns 400 if won is not a boolean, 500 for unexpected errors
 export const updateStats = async (req, res) => {
-    const  { won } = req.body
-    if (typeof won !== 'boolean') {
-        return res.status(400).json({ error: 'Invalid payload' })
-    }
     try {
+        const result = updateStatsSchema.safeParse(req.body)
+        if (!result.success) {
+            return res.status(400).json({ error: result.error.issues[0].message })
+        }
+        const { won } = result.data
         await prisma.user.update({
             where: { id: req.auth.userId },
             data: {
@@ -64,7 +63,6 @@ export const updateStats = async (req, res) => {
         })
         res.sendStatus(200)
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'Internal server error' });
+        next(error);
     }
 }
