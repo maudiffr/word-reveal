@@ -3,16 +3,12 @@ import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { View } from 'lucide-react'
 
 const Header = () => {
-  const { isLoggedIn, setIsLoggedIn } = useAuth()
+  const { user, isLoggedIn, logout } = useAuth()
   const location = useLocation()
   const navigate = useNavigate()
-  const username = localStorage.getItem('username')
 
   const handleLogout = () => {
-    localStorage.removeItem('token')
-    localStorage.removeItem('userId')
-    localStorage.removeItem('username')
-    setIsLoggedIn(false)
+    logout()
     navigate('/')
   }
 
@@ -41,9 +37,9 @@ const Header = () => {
               className="flex items-center justify-center gap-3 font-medium"
             >
               <div className="flex items-center justify-center w-9 h-9 border-2 rounded-full bg-white/20 hover:bg-white/30 transition-colors">
-                {username?.[0]?.toUpperCase()}
+                {user?.username?.[0]?.toUpperCase()}
               </div>
-              <span className="text-xl">{username}</span>
+              <span className="text-xl">{user.username}</span>
             </Link>
             <button
               onClick={handleLogout}

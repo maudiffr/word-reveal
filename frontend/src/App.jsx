@@ -1,6 +1,12 @@
 import { useEffect } from 'react'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import AuthProvider from '../src/context/AuthProvider'
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from 'react-router-dom'
+import { useAuth } from './hooks/useAuth'
+import AuthProvider from './context/AuthProvider'
 import LayoutWithHeader from './layouts/LayoutWithHeader'
 import Home from './pages/Home'
 import Register from './pages/Register'
@@ -26,6 +32,11 @@ import NotFound from './pages/NotFound'
 // <Link to="/register"> — équivalent du <a href> mais sans rechargement.
 //            Utilise pushState sous le capot.
 
+const ProtectedRoute = ({ children }) => {
+  const { isLoggedIn } = useAuth()
+  return isLoggedIn ? children : <Navigate to="/login" />
+}
+
 function App() {
   useEffect(() => {
     fetch(`${import.meta.env.VITE_API_URL}/`)
@@ -40,7 +51,14 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/register" element={<Register />} />
               <Route path="/login" element={<Login />} />
-              <Route path="/profile" element={<Profile />} />
+              <Route
+                path="/profile"
+                element={
+                  <ProtectedRoute>
+                    <Profile />
+                  </ProtectedRoute>
+                }
+              />
               <Route path="/leaderboard" element={<Leaderboard />} />
             </Route>
             <Route path="*" element={<NotFound />} />

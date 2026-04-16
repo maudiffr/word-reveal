@@ -4,11 +4,6 @@ A fullstack word-guessing game. A random word is hidden and revealed letter by l
 
 **[Play it live →](https://word-reveal.vercel.app)**
 
-![Word Reveal gameplay](./assets/demo.gif)
-<!-- Replace with an actual GIF or screenshot -->
-
----
-
 ## How it works
 
 - A random word is selected and all letters are hidden except one
@@ -16,7 +11,6 @@ A fullstack word-guessing game. A random word is hidden and revealed letter by l
 - Type your guess and submit before the last letter drops
 - Win/loss stats are saved to your profile if you're logged in
 
----
 
 ## Tech stack
 
@@ -39,7 +33,6 @@ A fullstack word-guessing game. A random word is hidden and revealed letter by l
 **Database**
 - PostgreSQL on **Supabase**
 
----
 
 ## Features
 
@@ -49,7 +42,6 @@ A fullstack word-guessing game. A random word is hidden and revealed letter by l
 - **Leaderboard** — public ranking sorted by words found
 - **Cold start handling** — silent ping on app load to wake the Render free tier
 
----
 
 ## Project structure
 
@@ -70,7 +62,6 @@ word-reveal/
     └── prisma/             # Schema, migrations
 ```
 
----
 
 ## API endpoints
 
@@ -82,7 +73,6 @@ word-reveal/
 | PATCH | `/api/user/stats` | ✓ | Update game stats |
 | GET | `/api/user/leaderboard` | — | Get all users ranked by wins |
 
----
 
 ## Local setup
 
@@ -110,8 +100,6 @@ npm install
 cp .env.example .env   # set VITE_API_URL=http://localhost:3000
 npm run dev
 ```
-
----
 
 ## Background
 

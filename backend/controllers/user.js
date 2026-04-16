@@ -1,4 +1,5 @@
 import { prisma } from '../lib/prisma.js'
+import { updateStatsSchema } from '../lib/schemas.js'
 
 // Fetches the authenticated user's profile from the database
 // Uses req.auth.userId injected by the auth middleware, no need for URL params
@@ -28,7 +29,7 @@ export const getUserProfile = async (req, res, next) => {
 // Fetches all users ordered by gamesWon descending for the leaderboard
 // Public routes, no auth required
 // Returns 500 for unexpected errors
-export const getLeaderboard = async (req, res) => {
+export const getLeaderboard = async (req, res, next) => {
     try {
         const users = await prisma.user.findMany({
             select: {
@@ -47,7 +48,7 @@ export const getLeaderboard = async (req, res) => {
 // Updates the authenticated user's stats at the end of a game
 // Increments gamesPlayed always, gamesWon only if won is true
 // Returns 400 if won is not a boolean, 500 for unexpected errors
-export const updateStats = async (req, res) => {
+export const updateStats = async (req, res, next) => {
     try {
         const result = updateStatsSchema.safeParse(req.body)
         if (!result.success) {

@@ -4,7 +4,7 @@ import { useAuth } from '../../hooks/useAuth'
 import { Eye, EyeOff } from 'lucide-react'
 
 function Register() {
-  const { setIsLoggedIn } = useAuth()
+  const { login } = useAuth()
   const [showPassword, setShowPassword] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
@@ -13,8 +13,7 @@ function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     setIsLoading(true)
-    const form = e.target
-    const formData = new FormData(form)
+    const formData = new FormData(e.target)
     const username = formData.get('username')
     const password = formData.get('password')
 
@@ -33,10 +32,7 @@ function Register() {
         return
       }
       setError('')
-      localStorage.setItem('token', data.token)
-      localStorage.setItem('userId', data.userId)
-      localStorage.setItem('username', data.username)
-      setIsLoggedIn(true)
+      login(data.token, data.userId, data.username)
       navigate('/')
     } catch (error) {
       console.error(error)
@@ -59,7 +55,7 @@ function Register() {
             placeholder="Username"
             aria-label="username"
             maxLength={16}
-            className={`w-full lg:w-80 px-2 py-2 border border-white/20 rounded-lg bg-white/10 lg:text-lg outline-none focus:ring`}
+            className="w-full lg:w-80 px-2 py-2 border border-white/20 rounded-lg bg-white/10 lg:text-lg outline-none focus:ring"
             required
           />
           <div className="relative">
@@ -70,7 +66,7 @@ function Register() {
               placeholder="Password"
               aria-label="password"
               maxLength={20}
-              className={`w-full lg:w-80 px-2 py-2 border border-white/20 bg-white/10 rounded-lg lg:text-lg outline-none focus:ring`}
+              className="w-full lg:w-80 px-2 py-2 border border-white/20 bg-white/10 rounded-lg lg:text-lg outline-none focus:ring"
               required
             />
             <button
@@ -85,7 +81,7 @@ function Register() {
             {isLoading ? (
               <div className="w-5 h-5 rounded-full border-2 border-white border-t-transparent animate-spin" />
             ) : (
-              error && <p className=" text-red-400 text-sm">{error}</p>
+              error && <p className="text-red-400 text-sm">{error}</p>
             )}
           </div>
           <button
@@ -97,7 +93,7 @@ function Register() {
           </button>
         </form>
         <div>
-          Déja un compte ?{' '}
+          Déjà un compte ?{' '}
           <Link to="/login" className="text-blue-400 hover:underline">
             Connexion
           </Link>

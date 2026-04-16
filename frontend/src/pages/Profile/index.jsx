@@ -16,10 +16,6 @@ function Profile() {
     const fetchProfile = async () => {
       try {
         const token = localStorage.getItem('token')
-        if (!token) {
-          navigate('/login')
-          return
-        }
         const response = await fetch(
           `${import.meta.env.VITE_API_URL}/api/user/profile`,
           {
