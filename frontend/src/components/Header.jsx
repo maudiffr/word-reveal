@@ -14,18 +14,18 @@ const Header = () => {
 
   return (
     <header className="bg-black">
-      <nav className="flex items-center justify-between max-w-340 mx-auto px-8 py-3 whitespace-nowrap">
-        <div className="flex items-center gap-12">
+      <nav className="flex items-center justify-between max-w-340 mx-auto px-4 sm:px-8 py-3 whitespace-nowrap">
+        <div className="flex items-center gap-4 sm:gap-12">
           <Link
             to="/"
-            className="flex items-center gap-2 text-2xl font-semibold"
+            className="flex items-center gap-2 text-lg sm:text-2xl font-semibold"
           >
             <View size={24} className="shrink-0" />
             Word Reveal
           </Link>
           <Link
             to="/leaderboard"
-            className="text-white/60 hover:text-white transition-colors"
+            className="text-sm sm:text-base text-white/60 hover:text-white transition-colors"
           >
             Classement
           </Link>
@@ -49,11 +49,11 @@ const Header = () => {
             </button>
           </div>
         ) : (
-          <div className="flex items-center gap-3 select-none">
+          <div className="flex items-center gap-2 sm:gap-3 select-none">
             {location.pathname !== '/login' && (
               <Link
                 to="/login"
-                className="px-3 py-1.5 border border-white/20 rounded-lg text-[15px] hover:bg-white/10 whitespace-nowrap transition-colors"
+                className="px-3 py-1.5 border border-white/20 rounded-lg text-xs sm:text-[15px] hover:bg-white/10 whitespace-nowrap transition-colors"
               >
                 Connexion
               </Link>
@@ -61,7 +61,7 @@ const Header = () => {
             {location.pathname !== '/register' && (
               <Link
                 to="/register"
-                className="px-3 py-1.5 border rounded-lg bg-white text-[15px] text-black hover:bg-white/80 whitespace-nowrap transition-colors"
+                className="px-3 py-1.5 border rounded-lg bg-white text-xs sm:text-[15px] text-black hover:bg-white/80 whitespace-nowrap transition-colors"
               >
                 Inscription
               </Link>
