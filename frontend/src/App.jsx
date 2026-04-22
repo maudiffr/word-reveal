@@ -12,6 +12,7 @@ import Home from './pages/Home'
 import Register from './pages/Register'
 import Login from './pages/Login'
 import Profile from './pages/Profile'
+import PublicProfile from './pages/PublicProfile'
 import Leaderboard from './pages/Leaderboard'
 import NotFound from './pages/NotFound'
 
@@ -59,6 +60,7 @@ function App() {
                   </ProtectedRoute>
                 }
               />
+              <Route path="/profile/:username" element={<PublicProfile />} />
               <Route path="/leaderboard" element={<Leaderboard />} />
             </Route>
             <Route path="*" element={<NotFound />} />

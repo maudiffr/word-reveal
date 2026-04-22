@@ -15,7 +15,7 @@ export const getUserProfile = async (req, res, next) => {
                 createdAt: true,
                 gamesPlayed: true,
                 gamesWon: true,
-            }
+            },
         });
         if (!user) {
             return res.status(404).json({ error: 'User does not exist '});
@@ -25,6 +25,29 @@ export const getUserProfile = async (req, res, next) => {
         next(error);
     }
 };
+
+// Fetches a user's public profile by username
+// Public route, no auth required
+// Returns 404 if the user does not exist, 500 for unexpected errors
+export const getPublicProfile = async (req, res, next) => {
+    try {
+        const user = await prisma.user.findUnique({
+            where: { username: req.params.username },
+            select: {
+                username: true,
+                createdAt: true,
+                gamesPlayed: true,
+                gamesWon: true,
+            },
+        })
+        if (!user) {
+            return res.status(404).json({ error: 'User does not exist '});
+        }
+        res.status(200).json(user);
+    } catch (error) {
+        next(error);
+    }
+}
 
 // Fetches all users ordered by gamesWon descending for the leaderboard
 // Public routes, no auth required

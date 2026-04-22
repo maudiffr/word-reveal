@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import {
   Calendar,
   Trophy,
@@ -8,32 +8,29 @@ import {
   CirclePercent,
 } from 'lucide-react'
 
-function Profile() {
+function PublicProfile() {
+  const { username } = useParams()
   const [userData, setUserData] = useState(null)
   const navigate = useNavigate()
 
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const token = localStorage.getItem('token')
         const response = await fetch(
-          `${import.meta.env.VITE_API_URL}/api/user/profile`,
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          },
+          `${import.meta.env.VITE_API_URL}/api/user/profile/${username}`,
         )
-        const data = await response.json()
         if (!response.ok) {
-          navigate('/login')
+          navigate('/not-found')
           return
         }
+        const data = await response.json()
         setUserData(data)
       } catch (error) {
         console.error(error)
       }
     }
     fetchProfile()
-  }, [navigate])
+  }, [username, navigate])
 
   if (!userData)
     return (
@@ -105,4 +102,4 @@ function Profile() {
   )
 }
 
-export default Profile
+export default PublicProfile

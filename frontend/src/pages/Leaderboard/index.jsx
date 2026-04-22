@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import { Trophy, Gamepad2, CirclePercent } from 'lucide-react'
 
 function Leaderboard() {
@@ -49,18 +50,22 @@ function Leaderboard() {
                   <div className="flex items-center justify-center w-10 h-10 border border-white/20 rounded-full bg-white/10 text-lg font-bold">
                     {user.username[0].toUpperCase()}
                   </div>
-                  <p className="text-lg font-medium">{user.username}</p>
+                  <p className="text-lg font-medium">
+                    <Link to={`/profile/${user.username}`}>
+                      {user.username}
+                    </Link>
+                  </p>
                 </div>
                 <div className="flex items-center gap-6 text-sm text-white/60">
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-2 w-10 sm:w-16">
                     <Gamepad2 size={16} />
                     <span>{user.gamesPlayed}</span>
                   </div>
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-2 w-10 sm:w-16">
                     <Trophy size={16} />
                     <span>{user.gamesWon}</span>
                   </div>
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-2 w-16">
                     <CirclePercent size={16} />
                     <span>{winrate}</span>
                   </div>
