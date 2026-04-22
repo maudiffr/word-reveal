@@ -15,7 +15,7 @@ const Header = () => {
   return (
     <header className="bg-black">
       <nav className="flex items-center justify-between max-w-340 mx-auto px-4 sm:px-8 py-3 whitespace-nowrap">
-        <div className="flex items-center gap-4 sm:gap-12">
+        <div className="flex items-center gap-4 sm:gap-20">
           <Link
             to="/"
             className="flex items-center gap-2 text-lg sm:text-2xl font-semibold"
